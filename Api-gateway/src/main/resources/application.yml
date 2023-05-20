@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: API-GATEWAY
+  config:
+    import: optional:configserver:http://localhost:8086
+
+
+  cloud:
+    gateway:
+      routes:
+        - id: BLOOD-ORGANIZATION-SERVICE
+          uri: lb://BLOOD-ORGANIZATION-SERVICE
+          predicates:
+            - Path=/organization/bloodorganization/**
+          filters:
+            - AuthenticationFilterClass
+
+        - id: EYE-ORGANIZATION-SERVICE
+          uri: lb://EYE-ORGANIZATION-SERVICE
+          predicates:
+            - Path=/organization/eyeorganization/**
+          filters:
+            - AuthenticationFilterClass
+
+        - id: ADMIN-SERVICE
+          uri: lb://ADMIN-SERVICE
+          predicates:
+            - Path=/api/admin/**
+
+        - id: USER-SERVICE
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user/bloodusers/**
+
+        - id: AUTHENTICATION-SERVER
+          uri: lb://AUTHENTICATION-SERVER
+          predicates:
+            - Path=/auth/organization/*
+
+
+
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
+
+
+

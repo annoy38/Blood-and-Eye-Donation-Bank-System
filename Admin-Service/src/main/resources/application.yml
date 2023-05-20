@@ -1,0 +1,56 @@
+server:
+  port: 8085
+  error:
+    whitelabel:
+      enabled: false
+spring:
+  application:
+    name: ADMIN-SERVICE
+  config:
+    import: optional:configserver:http://localhost:8086
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/admin_service
+    username: root
+    password: password
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        format_sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+#  security:
+#    user:
+#      name: user
+#      password: 1234
+
+hibernate:
+  dialect:
+    storage_engine:innodb
+
+#  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    username: bookf826@gmail.com
+#    password: izeremjlfxfuytxh
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
+#
+##  izeremjlfxfuytxh
+
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
+
